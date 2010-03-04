@@ -1,0 +1,36 @@
+libuuidrb uses e2fsprogs'[1] libuuid (<uuid/uuid.h>) to generate DCE
+compatible universally unique identifiers.
+
+0. prerequesites
+
+$ irb
+>> require 'lib_uuid'
+
+1. generating
+
+>> u = LibUUID::UUID.new
+=> #<LibUUID::UUID:0x969decc>
+>> u.to_guid # => "965555c1-2860-47f5-a3f5-a9c83a3b0b5e"
+>> u.to_short_guid # => "llVVwShgR_Wj9anIOjsLXg"
+
+or
+
+>> LibUUID::UUID.guid # => "ca220b11-a974-4c1d-99d1-78c32d997848"
+>> LibUUID::UUID.short_guid # => "8fPommPCQ7y1BSh55d7kFw"
+
+2. parsing
+
+>> v = LibUUID::UUID.new(u.to_guid) # => #<LibUUID::UUID:0x9696b2c>
+>> w = LibUUID::UUID.new(u.to_short_guid) # => #<LibUUID::UUID:0x9693684>
+>> u == v # => true
+>> u == w # => true
+
+3. validating
+
+>> LibUUID::UUID.valid? u.to_guid # => true
+>> LibUUID::UUID.valid? v.to_short_guid # => true
+>> LibUUID::UUID.valid? u.to_guid, v.to_guid, w.to_short_guid # => true
+>> LibUUID::UUID.valid? 'foo' # => false
+
+
+[1] http://e2fsprogs.sourceforge.net/

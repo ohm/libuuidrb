@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'benchmark'
+
+require 'lib_uuid'
+require 'uuidtools'
+require 'simple_uuid'
+require 'uuid'
+require 'uuid4r'
+
+n = 100_000
+Benchmark.bmbm do |x|
+  x.report('uuidtools') do
+    n.times { u = LibUUID::UUID.guid ; UUIDTools::UUID.parse(u) }
+  end
+
+  x.report('uuid4r') do
+    n.times { u = LibUUID::UUID.guid ; UUID4R::import(:str, u) }
+  end
+
+  x.report('lib_uuid') do
+    n.times { u = LibUUID::UUID.guid ; LibUUID::UUID.new(u) }
+  end
+
+  x.report('simple_uuid') do
+    n.times { u = LibUUID::UUID.guid ; SimpleUUID::UUID.new(u) }
+  end
+end

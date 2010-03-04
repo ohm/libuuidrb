@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'benchmark'
+
+require 'lib_uuid'
+require 'uuidtools'
+require 'simple_uuid'
+require 'uuid'
+require 'uuid4r'
+
+n = 100_000
+Benchmark.bmbm do |x|
+  x.report('uuid4r (1)') do
+    n.times { UUID4R::uuid_v1 }
+  end
+
+  x.report('uuid4r (2)') do
+    n.times { UUID4R::uuid_v4 }
+  end
+
+  x.report('uuid4r (3)') do
+    n.times { UUID4R::uuid_v1(:str) }
+  end
+
+  x.report('uuid4r (4)') do
+    n.times { UUID4R::uuid(1, :str) }
+  end
+
+  x.report('lib_uuid (1)') do
+    n.times { LibUUID::UUID.guid }
+  end
+
+  x.report('lib_uuid (2)') do
+    n.times { LibUUID::UUID.short_guid }
+  end
+
+  x.report('simple_uuid') do
+    n.times { SimpleUUID::UUID.new.to_guid }
+  end
+
+  x.report('uuidtools') do
+    n.times { UUIDTools::UUID.random_create.to_s }
+  end
+
+  x.report('uuid') do
+    n.times { UUID.generate }
+  end
+end

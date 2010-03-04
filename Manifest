@@ -1,0 +1,12 @@
+LICENSE
+Manifest
+README
+Rakefile
+ext/extconf.rb
+ext/lib_uuid.c
+ext/lib_uuid.h
+ext/uuid_base64.c
+ext/uuid_base64.h
+libuuidrb.gemspec
+test/test_compatibility.rb
+test/test_functionality.rb
