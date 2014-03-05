@@ -15,7 +15,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib", "ext"]
   s.rubyforge_project = %q{libuuidrb}
   s.summary = %q{libuuidrb uses libuuid to generate DCE compatible universally unique identifiers}
-  s.test_files = ["test/test_functionality.rb", "test/test_compatibility.rb"]
+
+  s.test_files = Dir.glob('spec/**/*_spec.rb') + ["test/test_compatibility.rb"]
 
   s.add_development_dependency 'rake-compiler'
+  s.add_development_dependency 'rspec', '>= 2.14'
 end
