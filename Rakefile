@@ -18,6 +18,8 @@ task :valgrind do
   sh *['valgrind', opts, 'rspec', 'spec/uuid_spec.rb'].flatten
 end
 
+task :default => :spec
+
 begin
   require 'rubygems'
   require 'rake'
