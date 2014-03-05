@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{libuuidrb}
   s.summary = %q{libuuidrb uses libuuid to generate DCE compatible universally unique identifiers}
   s.test_files = ["test/test_functionality.rb", "test/test_compatibility.rb"]
+
+  s.add_development_dependency 'rake-compiler'
 end

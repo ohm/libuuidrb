@@ -1,3 +1,9 @@
+require 'rake/extensiontask'
+
+Rake::ExtensionTask.new('lib_uuid') do |ext|
+  ext.ext_dir = 'ext'
+end
+
 begin
   require 'rubygems'
   require 'rake'
