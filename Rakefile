@@ -7,6 +7,17 @@ end
 
 RSpec::Core::RakeTask.new(:spec => [:clean, :compile])
 
+desc 'Valgrind functional specs'
+task :valgrind do
+  opts = %W(
+    --partial-loads-ok=yes
+    --undef-value-errors=no
+    --leak-check=full
+  )
+
+  sh *['valgrind', opts, 'rspec', 'spec/uuid_spec.rb'].flatten
+end
+
 begin
   require 'rubygems'
   require 'rake'
@@ -18,17 +29,6 @@ begin
     p.description    = 'libuuidrb uses libuuid to generate DCE compatible universally unique identifiers'
     p.ignore_pattern = ['tmp/*', 'script/*', 'benchmark/*']
     p.development_dependencies = []
-  end
-
-  desc 'valgrind functional tests'
-  task :valgrind do
-    opts = %W(
-      --partial-loads-ok=yes
-      --undef-value-errors=no
-      --leak-check=full
-    )
-
-    sh "valgrind #{opts.join(' ')} ruby test/test_functionality.rb"
   end
 rescue LoadError => le
   puts "#{le.message}"
