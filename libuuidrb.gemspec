@@ -9,14 +9,14 @@ Gem::Specification.new do |s|
   s.email = %q{}
   s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = ["LICENSE", "README", "ext/extconf.rb", "ext/lib_uuid.c", "ext/lib_uuid.h", "ext/uuid_base64.c", "ext/uuid_base64.h", "libuuidrb.gemspec"]
-  s.files = ["LICENSE", "Manifest", "README", "Rakefile", "ext/extconf.rb", "ext/lib_uuid.c", "ext/lib_uuid.h", "ext/uuid_base64.c", "ext/uuid_base64.h", "libuuidrb.gemspec", "test/test_compatibility.rb", "test/test_functionality.rb"]
+  s.files = ["LICENSE", "Manifest", "README", "Rakefile", "ext/extconf.rb", "ext/lib_uuid.c", "ext/lib_uuid.h", "ext/uuid_base64.c", "ext/uuid_base64.h", "libuuidrb.gemspec"]
   s.homepage = %q{http://github.com/ohm/libuuidrb}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Libuuidrb", "--main", "README"]
   s.require_paths = ["lib", "ext"]
   s.rubyforge_project = %q{libuuidrb}
   s.summary = %q{libuuidrb uses libuuid to generate DCE compatible universally unique identifiers}
 
-  s.test_files = Dir.glob('spec/**/*_spec.rb') + ["test/test_compatibility.rb"]
+  s.test_files = ["spec/uuid_spec.rb", "spec/uuid_compatibility_spec.rb"]
 
   s.add_development_dependency 'rake-compiler'
   s.add_development_dependency 'rspec', '>= 2.14'
