@@ -1,6 +1,22 @@
 require 'lib_uuid'
+require 'securerandom'
 
 describe LibUUID::UUID do
+  if SecureRandom.respond_to? :uuid
+    describe 'compatibility with SecureRandom' do
+      let(:random) { SecureRandom.uuid }
+
+      it 'parses UUIDs' do
+        LibUUID::UUID.new(random).tap do |uuid|
+          expect(uuid).to_not be_nil
+          expect(uuid.to_guid).to eq(random)
+          expect(uuid.type).to be(4)
+          expect(uuid.variant).to be(1)
+        end
+      end
+    end
+  end
+
   begin
     require 'simple_uuid'
 
