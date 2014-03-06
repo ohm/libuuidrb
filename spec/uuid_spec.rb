@@ -7,7 +7,7 @@ module LibUUID
     end
 
     let(:base64url) { /\A[-\w]{22}\z/ }
-    let(:canonical) { /\A\h{8}-\h{4}-\h{4}-\h{4}-\h{12}\z/ }
+    let(:canonical) { /\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i }
 
     let(:uuid_v1) { '6a9622b8-a422-11e3-be40-425861b86ab6' }
     let(:uuid_v3) { '5c8024b3-5a3d-31e4-b965-b3fc0e5bc8bf' }
