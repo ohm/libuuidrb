@@ -31,22 +31,6 @@ uuid_from_obj(VALUE obj, uuid_t uu)
   return -1;
 }
 
-int
-uuid_validity_check(const uuid_t uu)
-{
-  int type, variant;
-
-  type = uuid_type(uu);
-  if( type != UUID_TYPE_DCE_TIME && type != UUID_TYPE_DCE_RANDOM )
-    return -1;
-
-  variant = uuid_variant(uu);
-  if( variant < UUID_VARIANT_NCS || variant > UUID_VARIANT_OTHER )
-    return -1;
-
-  return 0;
-}
-
 VALUE
 lib_uuid_new(unsigned int argc, VALUE *argv, VALUE class)
 {
@@ -63,9 +47,6 @@ lib_uuid_new(unsigned int argc, VALUE *argv, VALUE class)
   if( argc == 1 )
   {
     if( uuid_from_obj(argv[0], parsed_uu) == -1 )
-      return Qnil;
-
-    if( uuid_validity_check(parsed_uu) == -1 )
       return Qnil;
   }
 
