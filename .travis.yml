@@ -1,0 +1,33 @@
+language: ruby
+
+rvm:
+  - 1.8.7
+  - 1.9.2
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+
+env:
+  - COMPATIBILITY=1
+
+matrix:
+  include:
+    - rvm: 1.8.7
+      env: BENCHMARK=1
+    - rvm: 1.9.3
+      env: BENCHMARK=1
+    - rvm: 2.1.0
+      env: BENCHMARK=1
+
+before_install:
+  - sudo apt-get install uuid-dev
+  - test -z "$BENCHMARK" || sudo apt-get --no-install-recommends -qq install libossp-uuid-dev
+  - test -z "$BENCHMARK" || gem install simple_uuid uuid uuid4r uuidtools
+  - test -z "$COMPATIBILITY" || gem install simple_uuid uuidtools
+
+script: >
+  rake &&
+  if [ "$BENCHMARK" ] ; then
+    ruby -I lib benchmark/create
+    ruby -I lib benchmark/parse
+  fi
