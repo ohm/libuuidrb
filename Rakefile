@@ -9,13 +9,13 @@ RSpec::Core::RakeTask.new(:spec => [:clean, :compile])
 
 desc 'Valgrind functional specs'
 task :valgrind do
-  opts = %W(
+  opts = %w(
     --partial-loads-ok=yes
     --undef-value-errors=no
     --leak-check=full
   )
 
-  sh *['valgrind', opts, 'rspec', 'spec/uuid_spec.rb'].flatten
+  sh *['valgrind', opts, %w(ruby -S rspec spec/uuid_spec.rb)].flatten
 end
 
 task :default => :spec
